@@ -38,7 +38,10 @@ public class GameState {
     }
 
     public void fillButtons() {
-        // this method will initialize the game-board with all the buttons
+        /* this method will initialize the game-board with all the buttons
+           by setting certain buttons to be clickable, making them a certain
+           color, etc.
+        */
     }
 
     @Override

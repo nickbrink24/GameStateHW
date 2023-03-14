@@ -1,8 +1,6 @@
 package com.example.gamestate;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.BaseMenuPresenter;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +8,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
     private Button runTest;
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +18,7 @@ public class MainActivity extends AppCompatActivity {
         runTest = findViewById(R.id.runTest);
         textView = findViewById(R.id.editText);
         runTest.setOnClickListener(this::onClick);
-
-
-        }
+    }
 
 
     public void onClick(View view) {
