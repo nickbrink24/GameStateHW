@@ -8,25 +8,22 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button runTest;
     private TextView textView;
+    private Button runTest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        runTest = findViewById(R.id.runTest);
         textView = findViewById(R.id.editText);
+        runTest = findViewById(R.id.runTest);
         runTest.setOnClickListener(this::onClick);
     }
-
 
     public void onClick(View view) {
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
-
     }
-
-
 }
