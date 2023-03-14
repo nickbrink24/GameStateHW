@@ -62,7 +62,7 @@ public class GameState {
     }
 
     public boolean showPossibleMoves(int player, Button b) {
-
+       return true;
     }
 
 

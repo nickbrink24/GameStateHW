@@ -6,22 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Run Test"
-        android:gravity="center"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/plain_text_input"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:inputType="textMultiLine"
-        android:lines="10"
-        tools:ignore="MissingConstraints" />
+        android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/editText"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:gravity="start|top" />
+
+        <Button
+            android:id="@+id/runTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Run Test" />
+    </LinearLayout>
 
 
 
