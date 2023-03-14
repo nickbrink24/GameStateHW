@@ -13,21 +13,17 @@
 
         <EditText
             android:id="@+id/editText"
+            android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="600dp"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:gravity="start|top" />
 
         <Button
             android:id="@+id/runTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Run Test" />
-
-
-
     </LinearLayout>
-
 
 
 
