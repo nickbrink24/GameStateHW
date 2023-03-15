@@ -2,17 +2,36 @@ package com.example.gamestate;
 
 public class Pieces {
 
-    /** private instance variables that define features of a piece:
-     * -type (reg or king)
-     * -color of the piece
-     *
-     * and whatever else you think is needed
-     */
+    private String type; // type of the piece (regular or king)
+    private String color; // color of the piece
 
-    /** constructor that initializes private instance variables */
 
-    /** getters and setters for each variable
-     */
+    // Constructor
+    public Pieces(String type, String color) {
+        this.type = type;
+        this.color = color;
+    }
 
-    /** toString method that prints the information of the piece */
+    // Getter and Setter methods for type
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // Getter and Setter methods for color
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    // toString method that prints the information of the piece
+    @Override
+    public String toString() {
+        return "Piece: " + type + ", Color: " + color;
+    }
 }
+
