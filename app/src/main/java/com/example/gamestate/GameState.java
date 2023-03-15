@@ -52,7 +52,43 @@ public class GameState {
     private int AIKings;
     private int turn;
 
+    /**
+     * private Pieces[][] pieces;
+     * private ArrayList<Piece> capturedBlack;
+     * private ArrayList<Piece> capturedRed;
+     */
+
     public GameState() {
+
+        /**
+         * pieces = new Pieces[8][8];
+         * capturedBlack = new ArrayList<>()
+         * capturedRed = new ArrayList<>()
+         *
+         * for (int row = 0; row < pieces.length; row++) {
+         *      for (int col = 0; col < pieces[row].length; col++) {
+         *          if (col == 0 || col == 2) {
+         *              if(row % 2 == 0) {
+         *                  pieces[row][col] = new Pieces(Pieces.Color.BLACK);
+         *              }
+         *          }
+         *          if (col == 1) {
+         *              if(row % 2 != 0) {
+         *                  pieces[row][col] = new Pieces(Pieces.Color.BLACK);
+         *              }
+         *          }
+         *
+         *          if (col == 5 || col == 7) {
+         *              if(row % 2 == 0) {
+         *                  pieces[row][col] = new Pieces(Pieces.Color.RED);
+         *              }
+         *          }
+         *          if (col == 6) {
+         *               if(row % 2 != 0) {
+         *                  pieces[row][col] = new Pieces(Pieces.Color.RED);
+         *              }
+         *          }
+         */
         // initialize number of pieces each player has remaining
         playerRemainingPieces = 12;
         playerKings = 0;
@@ -74,6 +110,16 @@ public class GameState {
         this.AIRemainingPieces = GS.AIRemainingPieces;
         this.AIKings = GS.AIKings;
         this.turn = GS.turn;
+        /**
+         * pieces = new Pieces[8][8];
+         * for (int row = 0; row < pieces.length; row++) {
+         *      for (int col = 0; col < pieces[row].length; col++) {
+         *          pieces[row][col] = GS.pieces[row][col];
+         *      }
+         * }
+         *
+         * turn = GS.turn;
+         */
     }
 
     public void fillButtons() {
