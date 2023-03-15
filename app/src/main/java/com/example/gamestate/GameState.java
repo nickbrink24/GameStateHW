@@ -29,7 +29,7 @@ public class GameState {
 
     // deep constructor
     public GameState(GameState GS) {
-        /* we only have a shallow constructor because we only have primitive types */
+        // we only have a shallow constructor because we only have primitive types
         this.playerRemainingPieces = GS.playerRemainingPieces;
         this.playerKings = GS.playerKings;
         this.AIRemainingPieces = GS.AIRemainingPieces;
@@ -39,6 +39,8 @@ public class GameState {
 
     public void fillButtons() {
         // this method will initialize the game-board with all the buttons
+        // by setting certain buttons to be clickable, making them a certain
+        // color, etc.
     }
 
     @Override
@@ -51,10 +53,10 @@ public class GameState {
         }
         System.out.println("Turn: " + playerTurn);
 
-        System.out.println("AI pieces remaining: " + AIRemainingPieces);
-        System.out.println("AI kings: " + AIKings);
         System.out.println("Player pieces remaining: " + playerRemainingPieces);
         System.out.println("Player kings: " + playerKings);
+        System.out.println("AI pieces remaining: " + AIRemainingPieces);
+        System.out.println("AI kings: " + AIKings);
 
         // not sure if we should print out information for each button since we have 64
         // if we need to print out each button, what button relevant info should we print?
@@ -64,6 +66,4 @@ public class GameState {
     public boolean showPossibleMoves(int player, Button b) {
        return true;
     }
-
-
 }
