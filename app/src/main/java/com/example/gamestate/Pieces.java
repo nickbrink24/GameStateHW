@@ -14,7 +14,7 @@ public class Pieces {
 
     // Getter and Setter methods for type
     public String getType() {
-        return type;
+        return this.type;
     }
     public void setType(String type) {
         this.type = type;
@@ -22,7 +22,7 @@ public class Pieces {
 
     // Getter and Setter methods for color
     public String getColor() {
-        return color;
+        return this.color;
     }
     public void setColor(String color) {
         this.color = color;
@@ -31,7 +31,7 @@ public class Pieces {
     // toString method that prints the information of the piece
     @Override
     public String toString() {
-        return "Piece: " + type + ", Color: " + color;
+        return ("Piece: " + type + ", Color: " + color);
     }
 }
 
