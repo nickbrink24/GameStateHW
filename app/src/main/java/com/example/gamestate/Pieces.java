@@ -12,6 +12,12 @@ public class Pieces {
         this.color = color;
     }
 
+    // Deep constructor
+    public Pieces(Pieces p) {
+        this.type = p.type;
+        this.color = p.color;
+    }
+
     // Getter and Setter methods for type
     public String getType() {
         return this.type;
