@@ -160,6 +160,9 @@ public class GameState {
         }
     }
 
+    public ArrayList<Pieces> capturedBlack() {return this.capturedBlack;}
+    public ArrayList<Pieces> capturedRed() {return this.capturedRed;}
+
     //check if selected piece belongs to player
     public boolean checkPiece(int num, Pieces piece){
         return true;
@@ -325,12 +328,6 @@ public class GameState {
         }
     }
 
-    public void fillButtons() {
-        // this method will initialize the game-board with all the buttons
-        // by setting certain buttons to be clickable, making them a certain
-        // color, etc.
-    }
-
     @Override
     public String toString() {
       /*  String playerTurn;
@@ -352,7 +349,4 @@ public class GameState {
         return "test";
     }
 
-    public boolean showPossibleMoves(int player, Button b) {
-        return true;
-    }
 }

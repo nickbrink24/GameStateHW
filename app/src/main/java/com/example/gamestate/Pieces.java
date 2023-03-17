@@ -43,13 +43,13 @@ public class Pieces {
         this.color = color;
     }
 
-    public int getX() { return this.x;}
+    public int getX() { return this.x; }
 
-    public void setX(int x) {this.x = x;}
+    public void setX(int x) {this.x = x; }
 
-    public int getY() { return this.y;}
+    public int getY() { return this.y; }
 
-    public void setY(int x) {this.x = y;}
+    public void setY(int x) {this.x = y; }
 
     // toString method that prints the information of the piece
     @Override
