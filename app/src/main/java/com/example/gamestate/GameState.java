@@ -162,8 +162,84 @@ public class GameState {
     }
 
     //check if piece can move to square
-    public boolean checkMove(int num, Pieces pieces){
-        return true;
+    //num indicates player
+    public boolean checkMove(int num, Pieces selectedPiece) {
+        if(selectedPiece.getType() == 0) {
+            int x_coord = selectedPiece.getX();
+            int y_coord = selectedPiece.getY();
+
+            /********** FOR THE PLAYER **********/
+
+            // if the x is 0, and it's the player's turn, the piece can only move
+            // diagonally up and to the right
+            if(x_coord == 0 && num == 0) {
+                // if the only possible move is occupied (not null), the piece can't move
+                if(this.pieces[x_coord + 1][y_coord + 1] != null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            // if the x is 7, and it's the player's turn, the piece can only move
+            // diagonally up and to the left
+            if(x_coord == 7 && num == 0) {
+                // if the only possible move is occupied (not null), the piece can't move
+                if(this.pieces[x_coord - 1][y_coord + 1] != null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            // if x is anything else and it's the player's turn, the piece can move freely
+            if(     this.pieces[x_coord - 1][y_coord + 1] != null
+                    && this.pieces[x_coord + 1][y_coord + 1] != null
+                    && num == 0) {
+                // both possible moves are occupied
+                return false;
+            } else {
+                return true;
+            }
+
+            /******** FOR THE AI ********/
+
+            // if the x is 0, and it's the AI's turn, the piece can only move
+            // diagonally down and to the right
+            if(x_coord == 0 && num == 1) {
+                // if the only possible move is occupied (not null), the piece can't move
+                if(this.pieces[x_coord + 1][y_coord - 1] != null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            // if the x is 7, and it's the AI's turn, the piece can only move
+            // diagonally down and to the left
+            if(x_coord == 7 && num == 1) {
+                // if the only possible move is occupied (not null), the piece can't move
+                if(this.pieces[x_coord - 1][y_coord - 1] != null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            // if x is anything else and it's the AI's turn, the piece can move freely
+            if(     this.pieces[x_coord - 1][y_coord - 1] != null
+                    && this.pieces[x_coord + 1][y_coord - 1] != null
+                    && num == 1) {
+                // both possible moves are occupied
+                return false;
+            } else {
+                return true;
+            }
+
+
+        } else {
+            // the piece is a king
+        }
     }
 
     //check if piece can be promoted at its current position
