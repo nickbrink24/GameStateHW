@@ -39,15 +39,6 @@ public class GameState {
      * <p>
      * Any other comments or ideas add below:
      */
-   /* private final int PLAYER_ONE = 1;
-    private final int PLAYER_AI = 2;
-
-    private Button[][] gameButtons;
-    private int playerRemainingPieces;
-    private int playerKings;
-    private int AIRemainingPieces;
-    private int AIKings;
-    private int turn;*/
 
 
     private Pieces[][] pieces; //2D array to represent board
@@ -97,31 +88,14 @@ public class GameState {
             }
         }
 
-
-
-
-       /* // initialize number of pieces each player has remaining
-        playerRemainingPieces = 12;
-        playerKings = 0;
-        AIRemainingPieces = 12;
-        AIKings = 0;*/
-
         // set the turn
         turn = 0;
 
-        // create the buttons
-        //fillButtons();
+
     }
 
     // deep constructor
     public GameState(GameState GS) {
-        // we only have a shallow constructor because we only have primitive types
-        /*this.playerRemainingPieces = GS.playerRemainingPieces;
-        this.playerKings = GS.playerKings;
-        this.AIRemainingPieces = GS.AIRemainingPieces;
-        this.AIKings = GS.AIKings;
-        this.turn = GS.turn;*/
-
         //transfer board to new gameState
         pieces = new Pieces[8][8];
         for (int row = 0; row < pieces.length; row++) {
@@ -170,21 +144,21 @@ public class GameState {
 
             /********** FOR THE PLAYER **********/
 
-            // if the x is 0, and it's the player's turn, the piece can only move
+            // if the y is 0, and it's the player's turn, the piece can only move
             // diagonally up and to the right
-            if(x_coord == 0 && num == 0) {
+            if(y_coord == 0 && num == 0) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord + 1][y_coord + 1] != null) {
+                if(this.pieces[x_coord + 1][y_coord - 1] != null || x_coord != 0) {
                     return false;
                 } else {
                     return true;
                 }
 
-            // if the x is 7 and it's the player's turn, the piece can only move
+            // if the y is 7 and and it's the player's turn, the piece can only move
             // diagonally up and to the left
-            } else if (x_coord == 7 && num == 0) {
+            } else if (y_coord == 7 && num == 0) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord - 1][y_coord + 1] != null) {
+                if(this.pieces[x_coord - 1][y_coord - 1] != null || x_coord != 0) {
                     return false;
                 } else {
                     return true;
@@ -192,8 +166,7 @@ public class GameState {
 
             // the piece can move either up/right or up/left
             } else if (num == 0) {
-                if(     this.pieces[x_coord - 1][y_coord + 1] != null
-                        && this.pieces[x_coord + 1][y_coord + 1] != null) {
+                if(this.pieces[x_coord - 1][y_coord + 1] != null && this.pieces[x_coord + 1][y_coord + 1] != null) {
                     // both possible moves are occupied
                     return false;
                 } else {
@@ -241,6 +214,7 @@ public class GameState {
 
         return false;
     }
+
 
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces) {
@@ -321,11 +295,6 @@ public class GameState {
         }
     }
 
-    public void fillButtons() {
-        // this method will initialize the game-board with all the buttons
-        // by setting certain buttons to be clickable, making them a certain
-        // color, etc.
-    }
 
     @Override
     public String toString() {
@@ -348,7 +317,5 @@ public class GameState {
         return "test";
     }
 
-    public boolean showPossibleMoves(int player, Button b) {
-        return true;
-    }
+
 }
