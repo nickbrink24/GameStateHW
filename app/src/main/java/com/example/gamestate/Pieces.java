@@ -60,9 +60,7 @@ public class Pieces {
         else if (color == Colors.BLACK) {
             return "B\t";
         }
-
             return "E\t";
-
     }
 }
 

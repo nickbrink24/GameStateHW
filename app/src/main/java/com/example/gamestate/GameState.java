@@ -18,6 +18,8 @@ public class GameState {
     private ArrayList<Pieces> capturedRed; //arrayList for captured Red pieces
     private int turn; //indicate who's turn it is
 
+    public Pieces emptyPiece;
+
     public GameState() {
         //make 8x8 array of pieces
         pieces = new Pieces[8][8];
@@ -91,6 +93,7 @@ public class GameState {
             }
         }
         turn = GS.turn;
+        emptyPiece = GS.emptyPiece;
     }
 
     //return piece at certain index of board
