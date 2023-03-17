@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,6),firstInstance.getPieces(4,4));
         } else if (clicks == 1) {
             capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(3,1),firstInstance.getPieces(3,3));
-        } else if (clicks == 3) {
+        } else if (clicks == 2) {
             capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,4),firstInstance.getPieces(3,3));
         }
         return capture;
