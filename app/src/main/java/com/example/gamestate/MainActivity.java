@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.editText);
         runTest = findViewById(R.id.runTest);
         runTest.setOnClickListener(this::onClick);
-        clicks = 0;
         firstInstance = new GameState();
         secondInstance = new GameState(firstInstance);
         thirdInstance = new GameState();
