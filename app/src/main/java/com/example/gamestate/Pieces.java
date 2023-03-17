@@ -36,7 +36,7 @@ public class Pieces {
     }
 
     // Getter and Setter methods for color
-    public Colors getColor() {
+    public Colors getColors() {
         return this.color;
     }
     public void setColor(Colors color) {
@@ -54,7 +54,15 @@ public class Pieces {
     // toString method that prints the information of the piece
     @Override
     public String toString() {
-        return ("Piece: " + type + ", Color: " + color);
+        if (color == Colors.RED) {
+            return "R\t";
+        }
+        else if (color == Colors.BLACK) {
+            return "B\t";
+        }
+
+            return "E\t";
+
     }
 }
 

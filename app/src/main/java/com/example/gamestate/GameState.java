@@ -35,28 +35,45 @@ public class GameState {
                     if (row % 2 == 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.BLACK, row, col);
                     }
+                    else {
+                        pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
+                    }
                 }
 
                 //fill second row with black pieces
-                if (col == 1) {
+                else if (col == 1) {
                     if (row % 2 != 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.BLACK, row, col);
+                    }
+                    else {
+                        pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
 
                 //fill sixth and eighth row with red pieces
-                if (col == 5 || col == 7) {
+                else if (col == 5 || col == 7) {
                     if (row % 2 == 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
+                    }
+                    else {
+                        pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
 
                 //fill seventh row with red pieces
-                if (col == 6) {
+                else if (col == 6) {
                     if (row % 2 != 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
                     }
+                    else {
+                        pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
+                    }
                 }
+                else {
+                    pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
+                }
+
+
             }
         }
 
@@ -114,12 +131,12 @@ public class GameState {
     //checks if the selected piece is able to go the new position
     public boolean checkMove(int num, Pieces currPos, Pieces newPos) {
         // checks if black piece is able to go to the new position they want to move to
-        if (num == 0 && currPos.getColor() == Pieces.Colors.BLACK && newPos.getColor() != Pieces.Colors.BLACK) {
+        if (num == 0 && currPos.getColors() == Pieces.Colors.BLACK && newPos.getColors() != Pieces.Colors.BLACK) {
             Pieces.Colors color = Pieces.Colors.BLACK;
             return movePiece(currPos, newPos, color);
 
         // checks if red piece is able to go to the new position they want to move to
-        } else if (num == 1 && currPos.getColor() == Pieces.Colors.RED && newPos.getColor() != Pieces.Colors.RED) {
+        } else if (num == 1 && currPos.getColors() == Pieces.Colors.RED && newPos.getColors() != Pieces.Colors.RED) {
             Pieces.Colors color = Pieces.Colors.RED;
             return movePiece(currPos, newPos, color);
         }
@@ -191,10 +208,8 @@ public class GameState {
             if(x_coord == 7){
                 return true;
             } 
-        } else{
-            //else return false, the piece cannot be promoted
-            return false;
-        }    
+        }
+        return false;
     }
 
     //check if a piece can be captured
@@ -202,7 +217,7 @@ public class GameState {
     public boolean checkCapture(int num, Pieces selectedPiece, Pieces capturePiece) {
         // make sure the pieces are different in color, or else they can't capture
         // because they belong to the same player
-        if (selectedPiece.getColor() == capturePiece.getColor()) {
+        if (selectedPiece.getColors() == capturePiece.getColors()) {
             return false;
         }
 
@@ -274,23 +289,14 @@ public class GameState {
 
     @Override
     public String toString() {
-      /*  String playerTurn;
-        if(turn == PLAYER_ONE) {
-            playerTurn = "Human";
-        } else {
-            playerTurn = "AI";
-        }
-        System.out.println("Turn: " + playerTurn);
-
-        System.out.println("Player pieces remaining: " + playerRemainingPieces);
-        System.out.println("Player kings: " + playerKings);
-        System.out.println("AI pieces remaining: " + AIRemainingPieces);
-        System.out.println("AI kings: " + AIKings);
-
-        // not sure if we should print out information for each button since we have 64
-        // if we need to print out each button, what button relevant info should we print?
-        return "";*/
-        return "test";
+      String toReturn ="";
+      for (int i = 0; i < pieces.length; i++) {
+          for (int j = 0; j < pieces[i].length; j++) {
+              toReturn += (pieces[j][i] + " ");
+          }
+          toReturn += "\n";
+      }
+        return toReturn;
     }
 
 

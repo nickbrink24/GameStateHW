@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
+
         if (clicks == 0) {
             textView.append("Initial Board:\n" + firstInstance);
         }
@@ -48,15 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             player = "Player";
         }
         textView.append(player + "'s Turn\n");
-        textView.append(player + "will move checker piece.\n");
+        textView.append(player + " will move checker piece.\n");
         // Capture a piece
-        if (canMove()) {
-            if (canCapture()) {
-                textView.append(player + "has capture piece!\n");
-                makeCapture();
-            }
-            movePiece();
-        }
+
         clicks++;
         firstInstance.setTurn(who);
         textView.append(String.valueOf(firstInstance) + "\n\n");
@@ -77,13 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean move = false;
         if (clicks == 0) {
             move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3));
         } else if (clicks == 1) {
             move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3));
         } else if (clicks == 2) {
             move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(5,3))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(5,3), firstInstance.getPieces(4,2);
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(5,3), firstInstance.getPieces(4,2));
         }
         return move;
     }
