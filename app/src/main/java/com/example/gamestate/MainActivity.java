@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             movePiece();
         }
+        boolean promote = firstInstance.checkPromotion(firstInstance.getPieces(6,6),firstInstance.getPieces(6,6).getColors());
+        if (promote == false) {
+            textView.append(player + "'s piece cannot advance.\n");
+        }
         clicks++; // keeps track of turn
         firstInstance.setTurn(who); // change turn
         // Displays updated board
