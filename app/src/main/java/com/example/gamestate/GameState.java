@@ -160,8 +160,8 @@ public class GameState {
         }
     }
 
-    public ArrayList<Pieces> capturedBlack() {return this.capturedBlack;}
-    public ArrayList<Pieces> capturedRed() {return this.capturedRed;}
+    public ArrayList<Pieces> capturedBlack() { return this.capturedBlack; }
+    public ArrayList<Pieces> capturedRed() { return this.capturedRed; }
 
     //check if selected piece belongs to player
     public boolean checkPiece(int num, Pieces piece){

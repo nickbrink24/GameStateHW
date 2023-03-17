@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.editText);
         runTest = findViewById(R.id.runTest);
         runTest.setOnClickListener(this::onClick);
+        clicks = 0;
         firstInstance = new GameState();
         secondInstance = new GameState(firstInstance);
         thirdInstance = new GameState();
@@ -35,10 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
-        textView.append("Board is made.");
+        if (clicks == 0) {
+            textView.append("Initial Board:\n" + firstInstance);
+        }
+        textView.append("Board is made.\n");
         // First player will move piece in first instance
         int who = firstInstance.getTurn(); // who is whoever's turn it is
-        String player;
+        String player = "";
         if (who == 1) {
             player = "AI";
         } else {
