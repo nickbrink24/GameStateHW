@@ -6,6 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * @author Griselda
+ * @author Katherine
+ * @author Ruth
+ * @author Nick
+ * @author Ethan
+ * @version 3.16.2023
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView textView; // text displayed in xml
@@ -15,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GameState secondInstance;
     private GameState thirdInstance;
     private GameState fourthInstance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             movePiece();
         }
+
+        //check if piece can promote
         boolean promote = firstInstance.checkPromotion(firstInstance.getPieces(6,6),firstInstance.getPieces(6,6).getColors());
         if (promote == false) {
             textView.append(player + "'s piece cannot advance.\n");
