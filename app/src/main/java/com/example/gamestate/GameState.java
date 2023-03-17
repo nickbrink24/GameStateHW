@@ -37,6 +37,8 @@ public class GameState {
                     if (row % 2 == 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.BLACK, row, col);
                     }
+
+                    //fill rest of first and third row with empty pieces
                     else {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
@@ -47,6 +49,7 @@ public class GameState {
                     if (row % 2 != 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.BLACK, row, col);
                     }
+                    //fill rest of second row with empty pieces
                     else {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
@@ -57,6 +60,7 @@ public class GameState {
                     if (row % 2 == 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
                     }
+                    //fill rest of sixth and eighth row with empty pieces
                     else {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
@@ -67,18 +71,17 @@ public class GameState {
                     if (row % 2 != 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
                     }
+                    //fill rest of seventh row with empty pieces
                     else {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
+                //fill rest of board with empty pieces
                 else {
                     pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                 }
-
-
             }
         }
-
         // set the turn
         turn = 0;
     }
@@ -109,7 +112,7 @@ public class GameState {
     }
 
     //get turn of player
-    public int getTurn(){
+    public int getTurn() {
         return turn;
     }
 
@@ -122,8 +125,13 @@ public class GameState {
         }
     }
 
-    public ArrayList<Pieces> capturedBlack() { return capturedBlack; }
-    public  ArrayList<Pieces> capturedRed() { return capturedRed; }
+    public ArrayList<Pieces> capturedBlack() {
+        return capturedBlack;
+    }
+
+    public ArrayList<Pieces> capturedRed() {
+        return capturedRed;
+    }
 
 
     //check if selected piece belongs to player
@@ -138,7 +146,7 @@ public class GameState {
             Pieces.Colors color = Pieces.Colors.BLACK;
             return movePiece(currPos, newPos, color);
 
-        // checks if red piece is able to go to the new position they want to move to
+            // checks if red piece is able to go to the new position they want to move to
         } else if (num == 1 && currPos.getColors() == Pieces.Colors.RED && newPos.getColors() != Pieces.Colors.RED) {
             Pieces.Colors color = Pieces.Colors.RED;
             return movePiece(currPos, newPos, color);
@@ -157,19 +165,19 @@ public class GameState {
                 if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) {
                     return true;
 
-                //If a black piece is on right edge of board, it can only move diagonal up left
+                    //If a black piece is on right edge of board, it can only move diagonal up left
                 } else if (currPos.getY() == 7) {
                     if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1) {
                         return true;
                     }
 
-                //Otherwise, the black piece can move diagonal up left or right
+                    //Otherwise, the black piece can move diagonal up left or right
                 } else {
                     if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1)) {
                         return true;
                     }
                 }
-            //Move piece for RED
+                //Move piece for RED
             } else if (colors == Pieces.Colors.RED) {
 
                 //If a red piece is on left edge of board, it can only move diagonal down right
@@ -177,12 +185,12 @@ public class GameState {
                     if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
                         return true;
 
-                    //If a red piece is on right edge of board, it can only move diagonal down left
+                        //If a red piece is on right edge of board, it can only move diagonal down left
                     } else if (currPos.getY() == 7) {
                         if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1) {
                             return true;
                         }
-                    //If a red piece is on left edge of board, it can only move diagonal down right and left
+                        //If a red piece is on left edge of board, it can only move diagonal down right and left
                     } else {
                         if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1)) {
                             return true;
@@ -198,21 +206,21 @@ public class GameState {
 
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces, Pieces.Colors colors) {
-       //determines current position of piece
+        //determines current position of piece
         int x_coord = pieces.getX();
-        
+
         //if x coordinate of piece is at end of board return true
         //it can be promoted
-        if(colors == Pieces.Colors.BLACK){
-            if(x_coord == 0){
+        if (colors == Pieces.Colors.BLACK) {
+            if (x_coord == 0) {
                 return true;
             }
 
-        //if x coordinate of red piece is at end of board return true;
-        } else if(colors == Pieces.Colors.RED){
-            if(x_coord == 7){
+            //if x coordinate of red piece is at end of board return true;
+        } else if (colors == Pieces.Colors.RED) {
+            if (x_coord == 7) {
                 return true;
-            } 
+            }
         }
         return false;
     }
@@ -292,15 +300,20 @@ public class GameState {
     }
 
 
+    //toString method prints board
     @Override
     public String toString() {
-      String toReturn ="";
-      for (int i = 0; i < pieces.length; i++) {
-          for (int j = 0; j < pieces[i].length; j++) {
-              toReturn += (pieces[j][i] + " ");
-          }
-          toReturn += "\n";
-      }
+
+        //String variable to append
+        String toReturn = "";
+
+        //for loop to iterate through entire board and print each piece
+        for (int i = 0; i < pieces.length; i++) {
+            for (int j = 0; j < pieces[i].length; j++) {
+                toReturn += (pieces[j][i] + " ");
+            }
+            toReturn += "\n";
+        }
         return toReturn;
     }
 
