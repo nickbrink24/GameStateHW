@@ -329,23 +329,36 @@ public class GameState {
 
     @Override
     public String toString() {
-      /*  String playerTurn;
-        if(turn == PLAYER_ONE) {
-            playerTurn = "Human";
-        } else {
-            playerTurn = "AI";
+
+        System.out.println("Printing toString method.");
+
+        String dataString = new String(); //the final string to be returned
+        String arrayString = new String(); //string containing 2d array board info
+        String capBlackPcs = new String(); //captured black pieces info string
+        String capRedPcs = new String(); //captured red pieces info string
+
+        //iterate rows and columns of 2d array
+        for (int i=0; i<this.pieces.length-1; i++ ){
+            for (int j=0; j<this.pieces.length-1; j++ ){
+                //
+                arrayString = (arrayString + this.getPieces(i, j)+", ");
+            }
+            arrayString = (arrayString + "\n");
         }
-        System.out.println("Turn: " + playerTurn);
+        //capturedBlack arraylist information
+        for (int i=0; i<this.capturedBlack.size()-1; i++ ){
+            capBlackPcs = (capBlackPcs + " " + this.capturedBlack.get(i).toString() + " ");
+        }
+        //capturedRed arraylist information
+        for (int i=0; i<this.capturedRed.size()-1; i++ ){
+            capRedPcs = (capRedPcs + " " + this.capturedRed.get(i).toString() + " ");
+        }
 
-        System.out.println("Player pieces remaining: " + playerRemainingPieces);
-        System.out.println("Player kings: " + playerKings);
-        System.out.println("AI pieces remaining: " + AIRemainingPieces);
-        System.out.println("AI kings: " + AIKings);
+        dataString = (" Turn value: " + this.turn + "\n" + capBlackPcs + capRedPcs + arrayString);
 
-        // not sure if we should print out information for each button since we have 64
-        // if we need to print out each button, what button relevant info should we print?
-        return "";*/
-        return "test";
+        System.out.println(dataString);
+
+        return dataString;
     }
 
     public boolean showPossibleMoves(int player, Button b) {
