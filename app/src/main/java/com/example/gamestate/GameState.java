@@ -173,17 +173,24 @@ public class GameState {
 
 
     //check if piece can be promoted at its current position
-    public boolean checkPromotion(Pieces pieces) {
+    public boolean checkPromotion(Pieces pieces, Pieces.Colors colors) {
        //determines current position of piece
-        int y_coord = pieces.getY();
+        int x_coord = pieces.getX();
+        
         //if y coordinate of piece is at end of board return true
         //it can be promoted
-        if(y_coord == 1){
-            return true;
+        if(colors == Pieces.Colors.BLACK){
+            if(x_coord == 0){
+                return true;
+            }
+        } else if(colors == Pieces.Colors.RED){
+            if(x_coord == 7){
+                return true;
+            } 
         } else{
             //else return false, the piece cannot be promoted
             return false;
-        }
+        }    
     }
 
     //check if a piece can be captured
