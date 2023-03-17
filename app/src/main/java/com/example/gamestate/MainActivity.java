@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firstInstance.setTurn(who);
         textView.append(String.valueOf(firstInstance) + "\n\n");
         if (clicks == 3) {
-            textView.append("CLick again.\n");
+            textView.append("Click again.\n");
         }
         if (clicks > 3) {
             textView.append("" + secondInstance);
@@ -86,10 +86,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void movePiece() {
         if (clicks == 0) {
             firstInstance.setPieces(4, 4, firstInstance.getPieces(4, 6));
+            firstInstance.setPieces(4, 6, firstInstance.emptyPiece);
         } else if (clicks == 1) {
             firstInstance.setPieces(3, 3, firstInstance.getPieces(3, 1));
+            firstInstance.setPieces(3, 1, firstInstance.emptyPiece);
         } else if (clicks == 2) {
             firstInstance.setPieces(4, 4, firstInstance.getPieces(3, 3));
+            firstInstance.setPieces(3, 3, firstInstance.emptyPiece);
         }
     }
 
