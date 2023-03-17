@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     public boolean canCapture() {
         boolean capture = false;
         if (clicks == 0) {
