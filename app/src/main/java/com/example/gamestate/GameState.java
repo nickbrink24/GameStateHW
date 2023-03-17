@@ -179,27 +179,26 @@ public class GameState {
                 } else {
                     return true;
                 }
-            }
 
-            // if the x is 7, and it's the player's turn, the piece can only move
+            // if the x is 7 and it's the player's turn, the piece can only move
             // diagonally up and to the left
-            if(x_coord == 7 && num == 0) {
+            } else if (x_coord == 7 && num == 0) {
                 // if the only possible move is occupied (not null), the piece can't move
                 if(this.pieces[x_coord - 1][y_coord + 1] != null) {
                     return false;
                 } else {
                     return true;
                 }
-            }
 
-            // if x is anything else and it's the player's turn, the piece can move freely
-            if(     this.pieces[x_coord - 1][y_coord + 1] != null
-                    && this.pieces[x_coord + 1][y_coord + 1] != null
-                    && num == 0) {
-                // both possible moves are occupied
-                return false;
-            } else {
-                return true;
+            // the piece can move either up/right or up/left
+            } else if (num == 0) {
+                if(     this.pieces[x_coord - 1][y_coord + 1] != null
+                        && this.pieces[x_coord + 1][y_coord + 1] != null) {
+                    // both possible moves are occupied
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
             /******** FOR THE AI ********/
@@ -213,33 +212,34 @@ public class GameState {
                 } else {
                     return true;
                 }
-            }
 
-            // if the x is 7, and it's the AI's turn, the piece can only move
-            // diagonally down and to the left
-            if(x_coord == 7 && num == 1) {
+                // if the x is 7 and it's the AI's turn, the piece can only move
+                // diagonally down and to the left
+            } else if(x_coord == 7 && num == 1) {
                 // if the only possible move is occupied (not null), the piece can't move
                 if(this.pieces[x_coord - 1][y_coord - 1] != null) {
                     return false;
                 } else {
                     return true;
                 }
-            }
 
-            // if x is anything else and it's the AI's turn, the piece can move freely
-            if(     this.pieces[x_coord - 1][y_coord - 1] != null
-                    && this.pieces[x_coord + 1][y_coord - 1] != null
-                    && num == 1) {
-                // both possible moves are occupied
-                return false;
-            } else {
-                return true;
+                // the piece can move either down/right or down/left
+            } else if(num == 1) {
+                if(     this.pieces[x_coord - 1][y_coord - 1] != null
+                        && this.pieces[x_coord + 1][y_coord - 1] != null) {
+                    // both possible moves are occupied
+                    return false;
+                } else {
+                    return true;
+                }
             }
 
 
         } else {
             // the piece is a king
         }
+
+        return false;
     }
 
     //check if piece can be promoted at its current position
@@ -250,7 +250,75 @@ public class GameState {
     //check if a piece can be captured
     //num indicates player
     public boolean checkCapture(int num, Pieces selectedPiece, Pieces capturePiece){
-        return true;
+        // make sure the pieces are different in color, or else they can't capture
+        // because they belong to the same player
+        if(selectedPiece.getColor() == capturePiece.getColor()) {
+            return false;
+        }
+
+        // now we know the pieces are different players
+        int x_coord_selected = selectedPiece.getX();
+        int y_coord_selected = selectedPiece.getY();
+        int x_coord_captured = capturePiece.getX();
+        int y_coord_captured = capturePiece.getY();
+
+        // if the x coordinate of the captured piece is 0 or 7, the piece can't be captured
+        if(x_coord_captured == 7 || x_coord_captured == 0) {
+            return false;
+        }
+
+        // if the y coordinate of the captured piece is 0 or 7, the piece can't be captured
+        if(y_coord_captured == 7 || y_coord_captured == 0) {
+            return false;
+        }
+
+        // now just make sure the space to jump to isn't occupied
+        // first check if the selected piece is just a regular piece vs a king
+        if(selectedPiece.getType() == 0) {
+            if(num == 0) {
+                // the player is trying to capture
+                if(x_coord_captured > x_coord_selected) {
+                    // direction capture is up and to the right
+                    if(this.pieces[x_coord_selected + 2][y_coord_selected + 2] != null) {
+                        // capture space is occupied
+                        return false;
+                    } else {
+                        // capture space isn't occupied
+                        return true;
+                    }
+                } else {
+                    // direction capture is up and to the left
+                    if(this.pieces[x_coord_selected - 2][y_coord_selected + 2] != null) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            } else {
+                // the AI is trying to capture
+                if(x_coord_captured > x_coord_selected) {
+                    // direction capture is down and to the right
+                    if(this.pieces[x_coord_selected + 2][y_coord_selected - 2] != null) {
+                        // capture space is occupied
+                        return false;
+                    } else {
+                        // capture space isn't occupied
+                        return true;
+                    }
+                } else {
+                    // direction capture is down and to the left
+                    if(this.pieces[x_coord_selected - 2][y_coord_selected - 2] != null) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+
+        } else {
+            // this piece is a king
+            return false;
+        }
     }
 
     public void fillButtons() {
