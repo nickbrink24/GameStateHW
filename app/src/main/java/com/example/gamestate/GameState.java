@@ -103,9 +103,7 @@ public class GameState {
                 pieces[row][col] = GS.pieces[row][col];
             }
         }
-
         turn = GS.turn;
-
     }
 
     //return piece at certain index of board
@@ -142,6 +140,7 @@ public class GameState {
     //check if piece can move to square
     //num indicates player, 0 = player
     public boolean checkMove(int num, Pieces currPos, Pieces newPos) {
+        // checks if piece is able to go to the new position they want to move to
         if (num == 0 && currPos.getColor() == Pieces.Colors.BLACK && newPos.getColor() != Pieces.Colors.BLACK) {
             Pieces.Colors color = Pieces.Colors.BLACK;
             return movePiece(currPos, newPos, color);
