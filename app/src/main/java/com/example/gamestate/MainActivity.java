@@ -23,23 +23,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView = findViewById(R.id.editText);
         runTest = findViewById(R.id.runTest);
         runTest.setOnClickListener(this::onClick);
-
+        firstInstance = new GameState();
+        secondInstance = new GameState(firstInstance);
+        thirdInstance = new GameState();
+        fourthInstance = new GameState(thirdInstance);
     }
 
     public void onClick(View view) {
+        // Empties
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
-        firstInstance = new GameState();
-        secondInstance = new GameState(firstInstance);
-        // Call each method in the game state at least once
-        firstInstance.fillButtons();
-        //firstInstance.showPossibleMoves()
-        textView.append("Board is made."); // will fix later
-        // Needs more methods from Piece Class
+        firstInstance.fillButtons(); // Fill all buttons
+        textView.append("Board is made.");
+        // First player will move piece in first instance
+        int who = firstInstance.getTurn(); // who is whoever's turn it is
+        String player;
+        if (who == 1) {
+            player = "AI";
+        } else {
+            player = "Player";
+        }
+            textView.append(player + "'s Turn\n");
+            textView.append(player + "will move checker piece.\n");
 
-        thirdInstance = new GameState();
-        fourthInstance = new GameState(thirdInstance);
+        // CAPTURE PIECE //
+        boolean belongs = firstInstance.checkPiece(who,firstInstance.getPieces(3,3));
+        boolean canMove = firstInstance.checkMove(who,firstInstance.getPieces(3,3));
+        if (canMove == true) {
+            // Move piece
+            textView.append(player + " has moved checker piece");
+        }
+        textView.append(String.valueOf(firstInstance) + "\n\n");
+
 
         textView.append(secondInstance.toString());
         textView.append(fourthInstance.toString());
