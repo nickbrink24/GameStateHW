@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             player = "Player";
         }
         textView.append(player + "'s Turn\n");
-        textView.append(player + "will move checker piece.\n");
+        textView.append(player + " will move checker piece.\n");
         // Capture a piece
         if (canMove()) {
             if (canCapture()) {
@@ -76,43 +76,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean canMove() {
         boolean move = false;
         if (clicks == 0) {
-            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(4,6))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(4,6), firstInstance.getPieces(4,4));
         } else if (clicks == 1) {
-            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(3,1))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(3,1), firstInstance.getPieces(3,3));
         } else if (clicks == 2) {
-            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(5,3))
-            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(5,3), firstInstance.getPieces(4,2);
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(4,4))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(4,4), firstInstance.getPieces(4,3));
         }
         return move;
     }
 
     public void movePiece() {
         if (clicks == 0) {
-            firstInstance.setPieces(5, 3, firstInstance.getPieces(6, 2));
+            firstInstance.setPieces(4, 4, firstInstance.getPieces(4, 6));
         } else if (clicks == 1) {
-            firstInstance.setPieces(4, 2, firstInstance.getPieces(3, 1));
+            firstInstance.setPieces(3, 3, firstInstance.getPieces(3, 1));
         } else if (clicks == 2) {
-            firstInstance.setPieces(5, 3, firstInstance.getPieces(4, 2));
+            firstInstance.setPieces(4, 4, firstInstance.getPieces(3, 3));
         }
     }
 
     public void makeCapture() {
         int currPlayer = firstInstance.getTurn();
         if (currPlayer == 0) {
-            firstInstance.capturedRed().add(firstInstance.getPieces(5,2));
+            firstInstance.capturedRed().add(firstInstance.getPieces(3,3));
         }
     }
 
     public boolean canCapture() {
         boolean capture = false;
         if (clicks == 0) {
-            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(6,2),firstInstance.getPieces(5,3));
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,6),firstInstance.getPieces(4,4));
         } else if (clicks == 1) {
-            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(3,1),firstInstance.getPieces(4,2));
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(3,1),firstInstance.getPieces(3,3));
         } else if (clicks == 3) {
-            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(5,3),firstInstance.getPieces(4,2));
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,4),firstInstance.getPieces(3,3));
         }
         return capture;
     }

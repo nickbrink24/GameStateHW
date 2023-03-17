@@ -59,7 +59,6 @@ public class GameState {
                 }
             }
         }
-
         // set the turn
         turn = 0;
     }
@@ -194,7 +193,8 @@ public class GameState {
         } else{
             //else return false, the piece cannot be promoted
             return false;
-        }    
+        }
+        return false;
     }
 
     //check if a piece can be captured
