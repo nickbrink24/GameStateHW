@@ -51,7 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView.append(player + "'s Turn\n");
         textView.append(player + " will move checker piece.\n");
         // Capture a piece
-
+        if(canMove()){
+            if(canCapture()){
+                textView.append(player + " has captured a piece!\n");
+                makeCapture();
+            }
+            movePiece();
+        }
         clicks++;
         firstInstance.setTurn(who);
         textView.append(String.valueOf(firstInstance) + "\n\n");
