@@ -47,67 +47,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             player = "Player";
         }
-            textView.append(player + "'s Turn\n");
-            textView.append(player + "will move checker piece.\n");
-
-        // CAPTURE PIECE //
-        boolean belongs = firstInstance.checkPiece(who,firstInstance.getPieces(3,3));
-        boolean canMove = firstInstance.checkMove(who,firstInstance.getPieces(3,3));
-        if (canMove == true) {
-            // Move piece
-            textView.append(player + " has moved checker piece");
+        textView.append(player + "'s Turn\n");
+        textView.append(player + "will move checker piece.\n");
+        // Capture a piece
+        if (canMove()) {
+            if (canCapture()) {
+                textView.append(player + "has capture piece!\n");
+                makeCapture();
+            }
+            movePiece();
         }
+        clicks++;
+        firstInstance.setTurn(who);
         textView.append(String.valueOf(firstInstance) + "\n\n");
-
-
-        textView.append(secondInstance.toString());
-        textView.append(fourthInstance.toString());
+        if (clicks == 3) {
+            textView.append("CLick again.\n");
+        }
+        if (clicks > 3) {
+            textView.append("" + secondInstance);
+            textView.append("\n");
+            textView.append("" + fourthInstance);
+            textView.append("\n");
+        }
+        //textView.append(secondInstance.toString());
+        //textView.append(fourthInstance.toString());
     }
 
     public boolean canMove() {
         boolean move = false;
         if (clicks == 0) {
-            //move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            //&& firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2)), firstInstance.getPieces(5,3);
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
         } else if (clicks == 1) {
-            //move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            //&& firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2)), firstInstance.getPieces(5
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2), firstInstance.getPieces(5,3);
         } else if (clicks == 2) {
-            //move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(6,2))
-            //&& firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(6,2)), firstInstance.getPieces(5,3);
+            move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(5,3))
+            && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(5,3), firstInstance.getPieces(4,2);
         }
         return move;
     }
 
     public void movePiece() {
         if (clicks == 0) {
-            firstInstance.setPieces(4, 4, firstInstance.getPieces(4, 6));
-            //firstInstance.setPieces(4, 6, firstInstance.emptyPieces);
+            firstInstance.setPieces(5, 3, firstInstance.getPieces(6, 2));
         } else if (clicks == 1) {
-            firstInstance.setPieces(3, 3, firstInstance.getPieces(3, 1));
-            //firstInstance.setPieces(3, 1, firstInstance.emptyPieces);
+            firstInstance.setPieces(4, 2, firstInstance.getPieces(3, 1));
         } else if (clicks == 2) {
-            firstInstance.setPieces(4, 4, firstInstance.getPieces(3, 3));
-            //firstInstance.setPieces(4, 4, firstInstance.emptyPieces);
+            firstInstance.setPieces(5, 3, firstInstance.getPieces(4, 2));
         }
     }
 
     public void makeCapture() {
         int currPlayer = firstInstance.getTurn();
         if (currPlayer == 0) {
-            firstInstance.capturedRed().add(firstInstance.getPieces(3,3));
+            firstInstance.capturedRed().add(firstInstance.getPieces(5,2));
         }
     }
-
 
     public boolean canCapture() {
         boolean capture = false;
         if (clicks == 0) {
-            //capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,6),)
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(6,2),firstInstance.getPieces(5,3));
         } else if (clicks == 1) {
-
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(3,1),firstInstance.getPieces(4,2));
         } else if (clicks == 3) {
-
+            capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(5,3),firstInstance.getPieces(4,2));
         }
         return capture;
     }

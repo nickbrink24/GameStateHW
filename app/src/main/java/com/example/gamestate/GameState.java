@@ -132,6 +132,10 @@ public class GameState {
         }
     }
 
+    public ArrayList<Pieces> capturedBlack() { return capturedBlack; }
+    public  ArrayList<Pieces> capturedRed() { return capturedRed; }
+
+
     //check if selected piece belongs to player
     public boolean checkPiece(int num, Pieces piece) {
         return true;
