@@ -201,12 +201,14 @@ public class GameState {
        //determines current position of piece
         int x_coord = pieces.getX();
         
-        //if y coordinate of piece is at end of board return true
+        //if x coordinate of piece is at end of board return true
         //it can be promoted
         if(colors == Pieces.Colors.BLACK){
             if(x_coord == 0){
                 return true;
             }
+
+        //if x coordinate of red piece is at end of board return true;
         } else if(colors == Pieces.Colors.RED){
             if(x_coord == 7){
                 return true;
