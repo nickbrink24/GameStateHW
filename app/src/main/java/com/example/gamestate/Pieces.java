@@ -9,8 +9,8 @@ public class Pieces {
     }
     private int type; // type of the piece (regular-0 or king-1)
     private Colors color; // color of the piece
-    private int x; //x coord of piece
-    private int y; //y coord of piece
+    private int x; // x coord of piece
+    private int y; // y coord of piece
 
 
     // Constructor

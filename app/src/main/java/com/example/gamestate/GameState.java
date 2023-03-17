@@ -127,7 +127,11 @@ public class GameState {
 
     //set move of player
     public void setTurn(int num) {
-        turn = num;
+        if (num == 0) {
+            turn = 1;
+        } else {
+            turn = 0;
+        }
     }
 
     //check if selected piece belongs to player
