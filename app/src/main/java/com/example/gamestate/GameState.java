@@ -140,86 +140,21 @@ public class GameState {
     }
 
     //check if piece can move to square
-    //num indicates player
-    public boolean checkMove(int num, Pieces selectedPiece) {
-        if (selectedPiece.getType() == 0) {
-            int x_coord = selectedPiece.getX();
-            int y_coord = selectedPiece.getY();
-
-            /********** FOR THE PLAYER **********/
-
-            // if the y is 0, and it's the player's turn, the piece can only move
-            // diagonally up and to the right
-            if (y_coord == 0 && num == 0) {
-                // if the only possible move is occupied (not null), the piece can't move
-                if (this.pieces[x_coord + 1][y_coord - 1] != null || x_coord != 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-                // if the y is 7 and and it's the player's turn, the piece can only move
-                // diagonally up and to the left
-            } else if (y_coord == 7 && num == 0) {
-                // if the only possible move is occupied (not null), the piece can't move
-                if (this.pieces[x_coord - 1][y_coord - 1] != null || x_coord != 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-                // the piece can move either up/right or up/left
-            } else if (num == 0) {
-                if (this.pieces[x_coord - 1][y_coord + 1] != null && this.pieces[x_coord + 1][y_coord + 1] != null) {
-                    // both possible moves are occupied
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            /******** FOR THE AI ********/
-
-            // if the x is 0, and it's the AI's turn, the piece can only move
-            // diagonally down and to the right
-            if (x_coord == 0 && num == 1) {
-                // if the only possible move is occupied (not null), the piece can't move
-                if (this.pieces[x_coord + 1][y_coord - 1] != null) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-                // if the x is 7 and it's the AI's turn, the piece can only move
-                // diagonally down and to the left
-            } else if (x_coord == 7 && num == 1) {
-                // if the only possible move is occupied (not null), the piece can't move
-                if (this.pieces[x_coord - 1][y_coord - 1] != null) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-                // the piece can move either down/right or down/left
-            } else if (num == 1) {
-                if (this.pieces[x_coord - 1][y_coord - 1] != null
-                        && this.pieces[x_coord + 1][y_coord - 1] != null) {
-                    // both possible moves are occupied
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-
-        } else {
-            // the piece is a king
+    //num indicates player, 0 = player
+    public boolean checkMove(int num, Pieces currPos, Pieces newPos) {
+        if (num == 0 && currPos.getColor() == Pieces.Colors.BLACK && newPos.getColor() != Pieces.Colors.BLACK) {
+            Pieces.Colors color = Pieces.Colors.BLACK;
+            return movePiece(currPos, newPos, color);
+        } else if (num == 1 && currPos.getColor() == Pieces.Colors.RED && newPos.getColor() != Pieces.Colors.RED) {
+            Pieces.Colors color = Pieces.Colors.RED;
+            return movePiece(currPos, newPos, color);
         }
-
         return false;
     }
 
     public boolean movePiece(Pieces currPos, Pieces newPos, Pieces.Colors colors) {
+
+        //Move piece for BLACK
         if (colors == Pieces.Colors.BLACK) {
             if (currPos.getY() == 0) {
                 if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) {
@@ -233,6 +168,7 @@ public class GameState {
                         return true;
                     }
                 }
+                //Move piece for RED
             } else if (colors == Pieces.Colors.RED) {
                 if (currPos.getY() == 0) {
                     if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
@@ -256,7 +192,16 @@ public class GameState {
 
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces) {
-        return true;
+       //determines current position of piece
+        int y_coord = pieces.getY();
+        //if y coordinate of piece is at end of board return true
+        //it can be promoted
+        if(y_coord == 1){
+            return true;
+        } else{
+            //else return false, the piece cannot be promoted
+            return false;
+        }
     }
 
     //check if a piece can be captured
