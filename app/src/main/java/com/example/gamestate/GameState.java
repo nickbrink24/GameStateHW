@@ -1,51 +1,22 @@
 package com.example.gamestate;
 
-import android.widget.Button;
-
 import java.util.ArrayList;
 
+/**
+ * @author Griselda
+ * @author Katherine
+ * @author Ruth
+ * @author Nick
+ * @author Ethan
+ * @version 3.16.2023
+ */
+
 public class GameState {
-
-    /**
-     * @Ethan I don't think we need to be implementing the players and AI for this assignment, but rather just
-     * show that we can make a game board with pieces and that they are capable of being moved. However, keep the
-     * turn variable to determine whose turn it is
-     * <p>
-     * In terms of the board itself, we could make an 8x8 2d array of Pieces where each index of the array
-     * represents a square on the board so that it is easier to manipulate the pieces. This will also make it easier to
-     * initialize and place the pieces in the constructor
-     * <p>
-     * For the deep copy, pass through a game state parameter into the constructor, and use the information of that
-     * said parameter to create a new game state using that info
-     * <p>
-     * getter and setter for a piece at a specific coord of the 2d array
-     * <p>
-     * getter and setter for whose move it is
-     * <p>
-     * Two arraylists can be used to store the pieces that have been captured
-     * <p>
-     * Important methods to consider (work in progress) :
-     * -Check to make sure the selected piece belongs to the player
-     * -Check if a space is a valid move
-     * -Check if a piece can be captured
-     * -Check if a piece is promoted to a king
-     * -Check winner
-     * + anything else needed to be considered
-     * <p>
-     * I don't know which class to put this in, either main activity or game state, but an example simulation should be
-     * created to show that all the above methods can be used. I don't think it needs to be intuitive and think we can just
-     * hard code specific pieces to move to show all the methods work. Also need to display the action made to the screen and it must
-     * be an appended string (doesn't replace old text)
-     * <p>
-     * Any other comments or ideas add below:
-     */
-
 
     private Pieces[][] pieces; //2D array to represent board
     private ArrayList<Pieces> capturedBlack; //arrayList for captured Black pieces
     private ArrayList<Pieces> capturedRed; //arrayList for captured Red pieces
     private int turn; //indicate who's turn it is
-
 
     public GameState() {
         //make 8x8 array of pieces
@@ -55,6 +26,7 @@ public class GameState {
         capturedBlack = new ArrayList<Pieces>();
         capturedRed = new ArrayList<Pieces>();
 
+        //for loop to iterate through 2D Pieces array
         for (int row = 0; row < pieces.length; row++) {
             for (int col = 0; col < pieces[row].length; col++) {
 
@@ -90,11 +62,9 @@ public class GameState {
 
         // set the turn
         turn = 0;
-
-
     }
 
-    // deep constructor
+    //deep copy constructor
     public GameState(GameState GS) {
         //transfer board to new gameState
         pieces = new Pieces[8][8];
@@ -137,13 +107,14 @@ public class GameState {
         return true;
     }
 
-    //check if piece can move to square
-    //num indicates player, 0 = player
+    //checks if the selected piece is able to go the new position
     public boolean checkMove(int num, Pieces currPos, Pieces newPos) {
-        // checks if piece is able to go to the new position they want to move to
+        // checks if black piece is able to go to the new position they want to move to
         if (num == 0 && currPos.getColor() == Pieces.Colors.BLACK && newPos.getColor() != Pieces.Colors.BLACK) {
             Pieces.Colors color = Pieces.Colors.BLACK;
             return movePiece(currPos, newPos, color);
+
+        // checks if red piece is able to go to the new position they want to move to
         } else if (num == 1 && currPos.getColor() == Pieces.Colors.RED && newPos.getColor() != Pieces.Colors.RED) {
             Pieces.Colors color = Pieces.Colors.RED;
             return movePiece(currPos, newPos, color);
@@ -151,31 +122,43 @@ public class GameState {
         return false;
     }
 
+    //checks if the piece can move to the designated position
     public boolean movePiece(Pieces currPos, Pieces newPos, Pieces.Colors colors) {
 
         //Move piece for BLACK
         if (colors == Pieces.Colors.BLACK) {
+
+            //If a black piece is on left edge of board, it can only move diagonal up right
             if (currPos.getY() == 0) {
                 if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) {
                     return true;
+
+                //If a black piece is on right edge of board, it can only move diagonal up left
                 } else if (currPos.getY() == 7) {
                     if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1) {
                         return true;
                     }
+
+                //Otherwise, the black piece can move diagonal up left or right
                 } else {
                     if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1)) {
                         return true;
                     }
                 }
-                //Move piece for RED
+            //Move piece for RED
             } else if (colors == Pieces.Colors.RED) {
+
+                //If a red piece is on left edge of board, it can only move diagonal down right
                 if (currPos.getY() == 0) {
                     if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
                         return true;
+
+                    //If a red piece is on right edge of board, it can only move diagonal down left
                     } else if (currPos.getY() == 7) {
                         if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1) {
                             return true;
                         }
+                    //If a red piece is on left edge of board, it can only move diagonal down right and left
                     } else {
                         if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1)) {
                             return true;
