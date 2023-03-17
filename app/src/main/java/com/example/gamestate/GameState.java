@@ -192,7 +192,16 @@ public class GameState {
 
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces) {
-        return true;
+       //determines current position of piece
+        int y_coord = pieces.getY();
+        //if y coordinate of piece is at end of board return true
+        //it can be promoted
+        if(y_coord == 1){
+            return true;
+        } else{
+            //else return false, the piece cannot be promoted
+            return false;
+        }
     }
 
     //check if a piece can be captured
