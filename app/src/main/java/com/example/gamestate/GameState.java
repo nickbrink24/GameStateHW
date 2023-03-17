@@ -121,7 +121,7 @@ public class GameState {
     }
 
     //get turn of player
-    public int getTurn(){
+    public int getTurn() {
         return turn;
     }
 
@@ -135,14 +135,14 @@ public class GameState {
     }
 
     //check if selected piece belongs to player
-    public boolean checkPiece(int num, Pieces piece){
+    public boolean checkPiece(int num, Pieces piece) {
         return true;
     }
 
     //check if piece can move to square
     //num indicates player
     public boolean checkMove(int num, Pieces selectedPiece) {
-        if(selectedPiece.getType() == 0) {
+        if (selectedPiece.getType() == 0) {
             int x_coord = selectedPiece.getX();
             int y_coord = selectedPiece.getY();
 
@@ -150,27 +150,27 @@ public class GameState {
 
             // if the y is 0, and it's the player's turn, the piece can only move
             // diagonally up and to the right
-            if(y_coord == 0 && num == 0) {
+            if (y_coord == 0 && num == 0) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord + 1][y_coord - 1] != null || x_coord != 0) {
+                if (this.pieces[x_coord + 1][y_coord - 1] != null || x_coord != 0) {
                     return false;
                 } else {
                     return true;
                 }
 
-            // if the y is 7 and and it's the player's turn, the piece can only move
-            // diagonally up and to the left
+                // if the y is 7 and and it's the player's turn, the piece can only move
+                // diagonally up and to the left
             } else if (y_coord == 7 && num == 0) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord - 1][y_coord - 1] != null || x_coord != 0) {
+                if (this.pieces[x_coord - 1][y_coord - 1] != null || x_coord != 0) {
                     return false;
                 } else {
                     return true;
                 }
 
-            // the piece can move either up/right or up/left
+                // the piece can move either up/right or up/left
             } else if (num == 0) {
-                if(this.pieces[x_coord - 1][y_coord + 1] != null && this.pieces[x_coord + 1][y_coord + 1] != null) {
+                if (this.pieces[x_coord - 1][y_coord + 1] != null && this.pieces[x_coord + 1][y_coord + 1] != null) {
                     // both possible moves are occupied
                     return false;
                 } else {
@@ -182,9 +182,9 @@ public class GameState {
 
             // if the x is 0, and it's the AI's turn, the piece can only move
             // diagonally down and to the right
-            if(x_coord == 0 && num == 1) {
+            if (x_coord == 0 && num == 1) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord + 1][y_coord - 1] != null) {
+                if (this.pieces[x_coord + 1][y_coord - 1] != null) {
                     return false;
                 } else {
                     return true;
@@ -192,17 +192,17 @@ public class GameState {
 
                 // if the x is 7 and it's the AI's turn, the piece can only move
                 // diagonally down and to the left
-            } else if(x_coord == 7 && num == 1) {
+            } else if (x_coord == 7 && num == 1) {
                 // if the only possible move is occupied (not null), the piece can't move
-                if(this.pieces[x_coord - 1][y_coord - 1] != null) {
+                if (this.pieces[x_coord - 1][y_coord - 1] != null) {
                     return false;
                 } else {
                     return true;
                 }
 
                 // the piece can move either down/right or down/left
-            } else if(num == 1) {
-                if(     this.pieces[x_coord - 1][y_coord - 1] != null
+            } else if (num == 1) {
+                if (this.pieces[x_coord - 1][y_coord - 1] != null
                         && this.pieces[x_coord + 1][y_coord - 1] != null) {
                     // both possible moves are occupied
                     return false;
@@ -219,6 +219,40 @@ public class GameState {
         return false;
     }
 
+    public boolean movePiece(Pieces currPos, Pieces newPos, Pieces.Colors colors) {
+        if (colors == Pieces.Colors.BLACK) {
+            if (currPos.getY() == 0) {
+                if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) {
+                    return true;
+                } else if (currPos.getY() == 7) {
+                    if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1) {
+                        return true;
+                    }
+                } else {
+                    if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() - 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() - 1)) {
+                        return true;
+                    }
+                }
+            } else if (colors == Pieces.Colors.RED) {
+                if (currPos.getY() == 0) {
+                    if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
+                        return true;
+                    } else if (currPos.getY() == 7) {
+                        if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1) {
+                            return true;
+                        }
+                    } else {
+                        if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1)) {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
 
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces) {
@@ -227,10 +261,10 @@ public class GameState {
 
     //check if a piece can be captured
     //num indicates player
-    public boolean checkCapture(int num, Pieces selectedPiece, Pieces capturePiece){
+    public boolean checkCapture(int num, Pieces selectedPiece, Pieces capturePiece) {
         // make sure the pieces are different in color, or else they can't capture
         // because they belong to the same player
-        if(selectedPiece.getColor() == capturePiece.getColor()) {
+        if (selectedPiece.getColor() == capturePiece.getColor()) {
             return false;
         }
 
@@ -241,23 +275,23 @@ public class GameState {
         int y_coord_captured = capturePiece.getY();
 
         // if the x coordinate of the captured piece is 0 or 7, the piece can't be captured
-        if(x_coord_captured == 7 || x_coord_captured == 0) {
+        if (x_coord_captured == 7 || x_coord_captured == 0) {
             return false;
         }
 
         // if the y coordinate of the captured piece is 0 or 7, the piece can't be captured
-        if(y_coord_captured == 7 || y_coord_captured == 0) {
+        if (y_coord_captured == 7 || y_coord_captured == 0) {
             return false;
         }
 
         // now just make sure the space to jump to isn't occupied
         // first check if the selected piece is just a regular piece vs a king
-        if(selectedPiece.getType() == 0) {
-            if(num == 0) {
+        if (selectedPiece.getType() == 0) {
+            if (num == 0) {
                 // the player is trying to capture
-                if(x_coord_captured > x_coord_selected) {
+                if (x_coord_captured > x_coord_selected) {
                     // direction capture is up and to the right
-                    if(this.pieces[x_coord_selected + 2][y_coord_selected + 2] != null) {
+                    if (this.pieces[x_coord_selected + 2][y_coord_selected + 2] != null) {
                         // capture space is occupied
                         return false;
                     } else {
@@ -266,7 +300,7 @@ public class GameState {
                     }
                 } else {
                     // direction capture is up and to the left
-                    if(this.pieces[x_coord_selected - 2][y_coord_selected + 2] != null) {
+                    if (this.pieces[x_coord_selected - 2][y_coord_selected + 2] != null) {
                         return false;
                     } else {
                         return true;
@@ -274,9 +308,9 @@ public class GameState {
                 }
             } else {
                 // the AI is trying to capture
-                if(x_coord_captured > x_coord_selected) {
+                if (x_coord_captured > x_coord_selected) {
                     // direction capture is down and to the right
-                    if(this.pieces[x_coord_selected + 2][y_coord_selected - 2] != null) {
+                    if (this.pieces[x_coord_selected + 2][y_coord_selected - 2] != null) {
                         // capture space is occupied
                         return false;
                     } else {
@@ -285,7 +319,7 @@ public class GameState {
                     }
                 } else {
                     // direction capture is down and to the left
-                    if(this.pieces[x_coord_selected - 2][y_coord_selected - 2] != null) {
+                    if (this.pieces[x_coord_selected - 2][y_coord_selected - 2] != null) {
                         return false;
                     } else {
                         return true;

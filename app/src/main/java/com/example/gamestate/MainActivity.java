@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
-        firstInstance.fillButtons(); // Fill all buttons
+
         textView.append("Board is made.");
         // First player will move piece in first instance
         int who = firstInstance.getTurn(); // who is whoever's turn it is
